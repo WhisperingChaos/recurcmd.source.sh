@@ -1,0 +1,6 @@
+# don't include items that are gotten from github
+test/config
+test/sourcer
+test/base/*
+!test/base/recurcmd.source.sh
+
