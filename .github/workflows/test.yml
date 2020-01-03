@@ -13,6 +13,4 @@ jobs:
       run: cd ./test; ./config.sh
     - name: Test
       run: cd ./test; ./recurcmd.source_test.sh
-    - name: fail!
-      run: false
 
