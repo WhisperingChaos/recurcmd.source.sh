@@ -73,12 +73,29 @@ test_run(){
 test_run_shell() {
 	(
 		cd ./testroot
-		assert_output_true test_list_run_expected --- recurcmd_run "test.sh" 
+		assert_output_true test_run_expected --- recurcmd_run "test.sh" 
 	)
 }
-test_list_run_expected(){
+test_run_expected(){
 	recurcmd_report "test.sh" '.'
 	echo "testroot"
+	recurcmd_report "test.sh" './level1'
+	echo "level1"
+	recurcmd_report "test.sh" './level1/level2'
+	echo "level2"
+}
+
+test_run_recursive(){
+
+	assert_true test_run_recursive_shell
+}
+test_run_recursive_shell() {
+	(
+		cd ./testroot
+		assert_output_true test_run_recursive_expected --- recurcmd_run "test.sh" 'true'
+	)
+}
+test_run_recursive_expected(){
 	recurcmd_report "test.sh" './level1'
 	echo "level1"
 	recurcmd_report "test.sh" './level1/level2'
@@ -94,6 +111,7 @@ main(){
 	test_report
 	test_list_gen
 	test_run
+	test_run_recursive
 	assert_return_code_set
 }
 main
