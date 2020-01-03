@@ -1,0 +1,15 @@
+name: CI
+
+on: [push]
+
+jobs:
+  Test:
+
+    runs-on: ubuntu-16.04
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Configure - needs to include components from other repositories.
+      run: cd ./test; ./config.sh
+    - name: Test
+      run: ./recurcmd.source_test.sh
