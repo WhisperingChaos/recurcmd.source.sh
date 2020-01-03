@@ -12,4 +12,4 @@ jobs:
     - name: Configure - needs to include components from other repositories.
       run: cd ./test; ./config.sh
     - name: Test
-      run: ./recurcmd.source_test.sh
+      run: cd ./test; ./recurcmd.source_test.sh
