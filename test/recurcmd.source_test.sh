@@ -9,7 +9,7 @@ config_executeable(){
 }
 
 test_report (){
-	assert_output_true recurcmd_report Command Directory --- test_report_expected Command Directory
+	assert_output_true test_report_expected Command Directory --- recurcmd_report Command Directory
 }
 test_report_expected(){
 	echo
@@ -50,13 +50,50 @@ test_pipe_option_save_restore(){
 	assert_true '[ "$pipeSTATE_CUR" = "$( set +o | grep pipefail )" ]'
 }
 
+test_list_gen(){
+
+	assert_true test_list_gen_shell
+}
+test_list_gen_shell(){
+	(
+		cd ./testroot
+		assert_output_true test_list_gen_expected --- recurcmd_list_gen "test.sh" 
+	)
+}
+test_list_gen_expected(){
+	echo "./test.sh"
+	echo "./level1/test.sh"
+	echo "./level1/level2/test.sh"
+}
+
+test_run(){
+
+	assert_true test_run_shell
+}
+test_run_shell() {
+	(
+		cd ./testroot
+		assert_output_true test_list_run_expected --- recurcmd_run "test.sh" 
+	)
+}
+test_list_run_expected(){
+	recurcmd_report "test.sh" '.'
+	echo "testroot"
+	recurcmd_report "test.sh" './level1'
+	echo "level1"
+	recurcmd_report "test.sh" './level1/level2'
+	echo "level2"
+}
+
 main(){
 	config_executeable "$(dirname "${BASH_SOURCE[0]}")"
-	assert_bool_detailed
-	test_report
+	assert_bool_performant
 	test_pipe_option_save
 	test_pipe_option_restore
 	test_pipe_option_save_restore
+	test_report
+	test_list_gen
+	test_run
 	assert_return_code_set
 }
 main
