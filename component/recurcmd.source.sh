@@ -47,9 +47,9 @@ recurcmd__run(){
 	local cmmdFILE_PATH
 	local cmmdNAME
 	while read -r cmmdFILE_PATH; do
-		cmmdDIR="$(dirname "cmmdFILE_PATH")"
-		cmmdNAME="$(basename "cmmdFILE_PATH")"
-		recursiveCmmd_report "$cmmdNAME" "$cmmdDIR"
+		cmmdDIR="$(dirname "$cmmdFILE_PATH")"
+		cmmdNAME="$(basename "$cmmdFILE_PATH")"
+		recurcmd_report "$cmmdNAME" "$cmmdDIR"
 		(
 			cd "$cmmdDIR"
 			./$cmmdNAME
