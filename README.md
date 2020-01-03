@@ -1,3 +1,4 @@
+[![Testing](https://github.com/whisperingchaos/recurcmd.source.sh/workflows/Test_recurcmd/badge.svg)](https://github.com/whisperingchaos/recurcmd.source.sh/actions)
 ### Purpose
 
 Find all commands that match the provided name that appear in the  current directory and its subordinates.  Once found, make the directory containing the command the current working directory and then execute the command.
