@@ -1,4 +1,4 @@
-name: Test recurcmd
+name: Test_recurcmd
 
 on: [push]
 
